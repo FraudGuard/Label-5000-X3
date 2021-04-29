@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-loading *ngIf="!ad"></ion-loading>
+  <ion-spinner *ngIf="!ad"></ion-spinner>
   <ng-container *ngIf="ad">
    <app-label-card (getNextAd)="getNextAd()" [ad]="ad"></app-label-card>
   </ng-container>

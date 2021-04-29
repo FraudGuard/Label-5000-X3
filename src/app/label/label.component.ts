@@ -12,7 +12,7 @@ import { AdsFromEbay } from '../models/adFromEbay';
 export class LabelComponent implements OnInit {
   ad: AdsFromEbay;
 
-  constructor(private apiService: ApiService, public toastController: ToastController) { }
+  constructor(public apiService: ApiService, public toastController: ToastController) { }
 
   ngOnInit() {
     this.getNextAd();
