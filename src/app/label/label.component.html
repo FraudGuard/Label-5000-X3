@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Label
+      <ng-container *ngIf="apiService.toLabel">({{apiService.toLabel}})</ng-container>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-loading *ngIf="!ad"></ion-loading>
+  <ng-container *ngIf="ad">
+   <app-label-card (getNextAd)="getNextAd()" [ad]="ad"></app-label-card>
+  </ng-container>
+</ion-content>

@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Review
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-loading *ngIf="!ad && !notfound"></ion-loading>
+  <ng-container *ngIf="ad && !notFound">
+   <app-label-card (getNextAd)="getNextAd()" [ad]="ad" [hideReviewButton]="true"></app-label-card>
+  </ng-container>
+  <p *ngIf="notFound">Keine Anzeige zur Review</p>
+</ion-content>

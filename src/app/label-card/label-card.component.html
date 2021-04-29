@@ -1,0 +1,83 @@
+<ion-grid width="full" *ngIf="ad">
+  <ion-row>
+    <ion-col size="4" *ngFor="let pic of getImages()">
+      <ion-img [src]="pic"></ion-img>
+    </ion-col>
+  </ion-row>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{ad.locations.location[0]['localized-name']?.value}}</ion-card-subtitle>
+      <ion-card-title>{{ad.title.value}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Kategorie: {{ad.category['id-name'].value}}<br />
+      Eingestellt am: {{ad['start-date-time'].value}}
+      <br /><br />
+      <div [innerHtml]="ad.description.value"></div>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Preis</ion-card-subtitle>
+      <ion-card-title>{{ad.price.amount.value}} {{ad.price['currency-iso-code'].value.value}}</ion-card-title>
+      <ion-card-content>
+        Preis Typ: {{ad.price['price-type'].value}}
+      </ion-card-content>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Account: {{ad['seller-account-type'].value}}</ion-card-subtitle>
+      <ion-card-title>{{ad['contact-name'].value}} (Kürzel: {{ad['contact-name-initials'].value}})</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Telefon: {{ad.phone?.value}}<br />
+      Erstellt am: {{ad['user-since-date-time'].value}}<br />
+      Badges:<br />
+      <ng-container *ngFor="let badge of ad.userBadges[0].badges">
+        <!-- {{badge|json}} -->
+        <b>{{badge.name}}</b>&nbsp;&nbsp;Level: {{badge.level}}&nbsp;&nbsp;Wert: {{badge.value}}
+        <br />
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Weitere Infos</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Displayoptions:<br />
+      ad-flagging-enabled: {{ad.displayoptions['ad-flagging-enabled'].value}}<br />
+      category-change-allowed: {{ad.displayoptions['category-change-allowed'].value}}<br />
+      hide-ads-on-vip: {{ad.displayoptions['hide-ads-on-vip'].value}}<br />
+      hide-similard-ads-on-vip: {{ad.displayoptions['hide-similard-ads-on-vip'].value}}<br />
+      reduced-ads-on-vip: {{ad.displayoptions['reduced-ads-on-vip'].value}}<br />
+      show-ratings: {{ad.displayoptions['show-ratings'].value}}
+      <br /><br />
+      Location Radius: {{ad.locations.location[0].radius.value}}<br />
+      OriginId: {{ad.originId.value}}<br />
+      PosterType: {{ad['poster-type'].value}}
+
+    </ion-card-content>
+  </ion-card>
+  <ion-row>
+    <ion-col>
+      <ion-button expand="full" color="success" (click)="setLabel(ad.id, false)">Kein Betrug</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="full" color="danger" (click)="setLabel(ad.id, true)">Betrug</ion-button>
+    </ion-col>
+    <ion-col *ngIf="!hideReviewButton">
+      <ion-button expand="full" (click)="setLabel(ad.id, null, true)">Unsicher</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
