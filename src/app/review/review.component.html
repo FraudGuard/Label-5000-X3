@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-loading *ngIf="!ad && !notfound"></ion-loading>
+  <ion-spinner *ngIf="!ad && !notFound"></ion-spinner>
   <ng-container *ngIf="ad && !notFound">
    <app-label-card (getNextAd)="getNextAd()" [ad]="ad" [hideReviewButton]="true"></app-label-card>
   </ng-container>
