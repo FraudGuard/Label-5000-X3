@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'https://fraudguard-backend-utmebwtwmq-ey.a.run.app',
+  api: 'https://fraudguard-utmebwtwmq-ew.a.run.app',
 };
