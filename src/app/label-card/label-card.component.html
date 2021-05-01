@@ -65,8 +65,11 @@
       <br /><br />
       Location Radius: {{ad.locations.location[0].radius.value}}<br />
       OriginId: {{ad.originId.value}}<br />
-      PosterType: {{ad['poster-type'].value}}
-
+      PosterType: {{ad['poster-type'].value}}<br/><br/>
+Attributes:<br/>
+<ng-container *ngFor="let attribute of ad.attributes[0].attribute">
+  <b>{{attribute.name}}</b>: {{attribute.value[0].value}}<br/>
+</ng-container>
     </ion-card-content>
   </ion-card>
   <ion-row style="position: fixed; bottom: 0; left: 0; right: 0;">
