@@ -11,7 +11,7 @@
 <ion-content>
   <ion-spinner *ngIf="!ad && !notFound"></ion-spinner>
   <ng-container *ngIf="ad && !notFound">
-   <app-label-card (getNextAd)="getNextAd()" [ad]="ad" [hideReviewButton]="true"></app-label-card>
+   <app-label-card (getNextAd)="getNextAd()" [ad]="ad" [adAnalyzed]="adAnalyzed" [isToReview]="true"></app-label-card>
   </ng-container>
   <p *ngIf="notFound">Keine Anzeige zur Review</p>
 </ion-content>

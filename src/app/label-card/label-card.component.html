@@ -5,82 +5,276 @@
     </ion-col>
   </ion-row>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>{{ad.locations.location[0]['localized-name']?.value}}</ion-card-subtitle>
-      <ion-card-title>{{ad.title.value}}</ion-card-title>
-    </ion-card-header>
+  <ion-row *ngIf="adAnalyzed">
+    <ion-col [size]="7">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Kommentar</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{ adAnalyzed.comment }}
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="5" *ngIf="isToReview && adAnalyzed">
+      <ion-card>
+        <ion-card-content>
+          pattern_score: {{ adAnalyzed.pattern_score }}<br />
+          pattern_gesamtscore: {{ adAnalyzed.pattern_gesamtscore }}<br />
+          pattern_anzahl_zutreffend: {{ adAnalyzed.pattern_anzahl_zutreffend
+          }}<br />
+          pattern_anzahl_gesamt: {{ adAnalyzed.pattern_anzahl_gesamt }}<br />
+          antipattern_score: {{ adAnalyzed.antipattern_score }}<br />
+          antipattern_gesamtscore: {{ adAnalyzed.antipattern_gesamtscore
+          }}<br />
+          antipattern_anzahl_zutreffend:
+          {{ adAnalyzed.antipattern_anzahl_zutreffend }}<br />
+          antipattern_anzahl_gesamt: {{ adAnalyzed.antipattern_anzahl_gesamt
+          }}<br />
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col [size]="isToReview ? 7 : 12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle
+            >{{ ad._id }} –
+            {{
+              ad.locations.location[0]["localized-name"]?.value
+            }}</ion-card-subtitle
+          >
+          <ion-card-title>{{ ad.title.value }}</ion-card-title>
+        </ion-card-header>
 
-    <ion-card-content>
-      Kategorie: {{ad.category['id-name'].value}}<br />
-      Eingestellt am: {{ad['start-date-time'].value}}
-      <br /><br />
-      <div [innerHtml]="ad.description.value"></div>
-    </ion-card-content>
-  </ion-card>
+        <ion-card-content>
+          Kategorie: {{ ad.category["id-name"].value }}<br />
+          Eingestellt am: {{ ad["start-date-time"].value }} <br /><br />
+          <div [innerHtml]="ad.description.value"></div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="5" *ngIf="isToReview && adAnalyzed">
+      <ion-card>
+        <ion-card-content>
+          titel_enthaelt_neu: {{ adAnalyzed.titel_enthaelt_neu }}<br />
+          titel_enthaelt_ovp: {{ adAnalyzed.titel_enthaelt_ovp }}<br />
+          titel_enthaelt_verschweißt:
+          {{ adAnalyzed["titel_enthaelt_verschweißt"] }}<br />
+          titel_enthaelt_ungeoeffnet: {{ adAnalyzed.titel_enthaelt_ungeoeffnet
+          }}<br />
+          titel_enthaelt_zeichen: {{ adAnalyzed.titel_enthaelt_zeichen }}<br />
+          ap_titel_enthaelt_gebraucht:
+          {{ adAnalyzed.ap_titel_enthaelt_gebraucht }}<br />
+          ap_titel_enthaelt_suche: {{ adAnalyzed.ap_titel_enthaelt_suche
+          }}<br />
+          ap_titel_enthaelt_tausche: {{ adAnalyzed.ap_titel_enthaelt_tausche
+          }}<br />
+          ap_titel_enthaelt_kilo: {{ adAnalyzed.ap_titel_enthaelt_kilo }}<br />
+          ap_titel_enthaelt_sammlung: {{ adAnalyzed.ap_titel_enthaelt_sammlung
+          }}<br /><br />
 
+          beschreibung_enthaelt_ueberweisung:
+          {{ adAnalyzed.beschreibung_enthaelt_ueberweisung }}<br />
+          beschreibung_enthaelt_sepa: {{ adAnalyzed.beschreibung_enthaelt_sepa
+          }}<br />
+          beschreibung_enthaelt_versand:
+          {{ adAnalyzed.beschreibung_enthaelt_versand }}<br />
+          beschreibung_enthaelt_neu: {{ adAnalyzed.beschreibung_enthaelt_neu
+          }}<br />
+          beschreibung_enthaelt_ovp: {{ adAnalyzed.beschreibung_enthaelt_ovp
+          }}<br />
+          beschreibung_enthaelt_versiegelt:
+          {{ adAnalyzed.beschreibung_enthaelt_versiegelt }}<br />
+          beschreibung_enthaelt_whatsapp:
+          {{ adAnalyzed.beschreibung_enthaelt_whatsapp }}<br />
+          beschreibung_ist_kopiert_anzeige:
+          {{ adAnalyzed.beschreibung_ist_kopiert_anzeige }}<br />
+          beschreibung_ist_kopiert_unternehmen:
+          {{ adAnalyzed.beschreibung_ist_kopiert_unternehmen }}<br />
+          ap_beschreibung_enthaelt_barzahlung:
+          {{ adAnalyzed.ap_beschreibung_enthaelt_barzahlung }}<br />
+          ap_beschreibung_enthaelt_gebraucht:
+          {{ adAnalyzed.ap_beschreibung_enthaelt_gebraucht }}<br />
+          ap_beschreibung_enthaelt_tausch:
+          {{ adAnalyzed.ap_beschreibung_enthaelt_tausch }}<br />
+          ap_beschreibung_enthaelt_abholung:
+          {{ adAnalyzed.ap_beschreibung_enthaelt_abholung }}<br />
+          ap_beschreibung_enthaelt_suche:
+          {{ adAnalyzed.ap_beschreibung_enthaelt_suche }}<br />
+          ap_beschreibung_enthaelt_sammleraufloesung:
+          {{ adAnalyzed.ap_beschreibung_enthaelt_sammleraufloesung }}<br />
+          ap_beschreibung_enthaelt_kilo:
+          {{ adAnalyzed.ap_beschreibung_enthaelt_kilo }}
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col [size]="isToReview ? 7 : 12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Preis</ion-card-subtitle>
+          <ion-card-title
+            >{{ ad.price.amount.value }}
+            {{ ad.price["currency-iso-code"].value.value }}</ion-card-title
+          >
+          <ion-card-content>
+            Preis Typ: {{ ad.price["price-type"].value }}
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+    <ion-col size="5" *ngIf="isToReview && adAnalyzed">
+      <ion-card>
+        <ion-card-content>
+          preis_unter_marktwert: {{ adAnalyzed.preis_unter_marktwert }}<br />
+          preis_abweichung_marktwert: {{ adAnalyzed.preis_abweichung_marktwert
+          }}<br />
+          preis_waehrung_eur: {{ adAnalyzed.preis_waehrung_eur }}<br />
+          preis_typ_vb: {{ adAnalyzed.preis_typ_vb }}<br />
+          ap_preis_ist_leer: {{ adAnalyzed.ap_preis_ist_leer }}
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Preis</ion-card-subtitle>
-      <ion-card-title>{{ad.price.amount.value}} {{ad.price['currency-iso-code'].value.value}}</ion-card-title>
-      <ion-card-content>
-        Preis Typ: {{ad.price['price-type'].value}}
-      </ion-card-content>
-    </ion-card-header>
-  </ion-card>
+  <ion-row>
+    <ion-col [size]="isToReview ? 7 : 12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle
+            >Account: {{ ad["seller-account-type"].value }}</ion-card-subtitle
+          >
+          <ion-card-title
+            >{{ ad["contact-name"].value }} (Kürzel:
+            {{ ad["contact-name-initials"].value }})</ion-card-title
+          >
+        </ion-card-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Account: {{ad['seller-account-type'].value}}</ion-card-subtitle>
-      <ion-card-title>{{ad['contact-name'].value}} (Kürzel: {{ad['contact-name-initials'].value}})</ion-card-title>
-    </ion-card-header>
+        <ion-card-content>
+          Telefon: {{ ad.phone?.value }}<br />
+          Erstellt am: {{ ad["user-since-date-time"].value }}<br />
+          Badges:<br />
+          <ng-container *ngFor="let badge of ad.userBadges[0].badges">
+            <!-- {{badge|json}} -->
+            <b>{{ badge.name }}</b
+            >&nbsp;&nbsp;Level: {{ badge.level }}&nbsp;&nbsp;Wert:
+            {{ badge.value }}
+            <br />
+          </ng-container>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="5" *ngIf="isToReview && adAnalyzed">
+      <ion-card>
+        <ion-card-content>
+          konto_bewertungen_anzahl:
+          {{ adAnalyzed.konto_bewertungen_anzahl }}<br />
+          konto_erstellt_zeit: {{ adAnalyzed.konto_erstellt_zeit }}<br />
+          konto_anzeigen_anzahl: {{ adAnalyzed.konto_anzeigen_anzahl }}<br />
+          konto_anzeigen_betrugsrate: {{ adAnalyzed.konto_anzeigen_betrugsrate
+          }}<br />
+          konto_follower_anzahl: {{ adAnalyzed.konto_follower_anzahl }}<br />
+          konto_antwortzeit: {{ adAnalyzed.konto_antwortzeit }}<br />
+          konto_antwortrate: {{ adAnalyzed.konto_antwortrate }}<br />
+          konto_freundlichkeit: {{ adAnalyzed.konto_freundlichkeit }}<br />
+          konto_bewertung: {{ adAnalyzed.konto_bewertung }}<br />
+          konto_anzeigen_gleich: {{ adAnalyzed.konto_anzeigen_gleich }}<br />
+          konto_name_laenge: {{ adAnalyzed.konto_name_laenge }}<br />
+          konto_name_enthaelt_gmbh: {{ adAnalyzed.konto_name_enthaelt_gmbh
+          }}<br />
+          konto_anzeigen_verschiedene_orte:
+          {{ adAnalyzed.konto_anzeigen_verschiedene_orte }}<br />
+          konto_name_sonderzeichen_anzahl:
+          {{ adAnalyzed.konto_name_sonderzeichen_anzahl }}<br />
+          konto_name_enthaelt_unueblich:
+          {{ adAnalyzed.konto_name_enthaelt_unueblich }}<br />
+          konto_gewerblich: {{ adAnalyzed.konto_gewerblich }}<br />
+          konto_privat: {{ adAnalyzed.konto_privat }}<br />
+          konto_anzeigen_ueber_100: {{ adAnalyzed.konto_anzeigen_ueber_100
+          }}<br />
+          ap_konto_name_natuerlich: {{ adAnalyzed.ap_konto_name_natuerlich }}
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 
-    <ion-card-content>
-      Telefon: {{ad.phone?.value}}<br />
-      Erstellt am: {{ad['user-since-date-time'].value}}<br />
-      Badges:<br />
-      <ng-container *ngFor="let badge of ad.userBadges[0].badges">
-        <!-- {{badge|json}} -->
-        <b>{{badge.name}}</b>&nbsp;&nbsp;Level: {{badge.level}}&nbsp;&nbsp;Wert: {{badge.value}}
-        <br />
-      </ng-container>
-    </ion-card-content>
-  </ion-card>
+  <ion-row>
+    <ion-col [size]="isToReview ? 7 : 12">
+      <ion-card style="margin-bottom: 100px">
+        <ion-card-header>
+          <ion-card-title>Weitere Infos</ion-card-title>
+        </ion-card-header>
 
+        <ion-card-content>
+          Displayoptions:<br />
+          ad-flagging-enabled:
+          {{ ad.displayoptions["ad-flagging-enabled"].value }}<br />
+          category-change-allowed:
+          {{ ad.displayoptions["category-change-allowed"].value }}<br />
+          hide-ads-on-vip: {{ ad.displayoptions["hide-ads-on-vip"].value
+          }}<br />
+          hide-similard-ads-on-vip:
+          {{ ad.displayoptions["hide-similard-ads-on-vip"].value }}<br />
+          reduced-ads-on-vip: {{ ad.displayoptions["reduced-ads-on-vip"].value
+          }}<br />
+          show-ratings: {{ ad.displayoptions["show-ratings"].value }}
+          <br /><br />
+          Location Radius: {{ ad.locations.location[0].radius.value }}<br />
+          OriginId: {{ ad.originId?.value }}<br />
+          PosterType: {{ ad["poster-type"]?.value }}<br /><br />
+          Attributes:<br />
+          <ng-container *ngFor="let attribute of ad.attributes[0].attribute">
+            <b>{{ attribute.name }}</b
+            >: {{ attribute.value[0].value }}<br />
+          </ng-container>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="5" *ngIf="isToReview && adAnalyzed">
+      <ion-card>
+        <ion-card-content>
+          metadaten_laengengrad: {{ adAnalyzed.metadaten_laengengrad }}<br />
+          metadaten_breitengrad: {{ adAnalyzed.metadaten_breitengrad }}<br />
+          metadaten_kategorie: {{ adAnalyzed.metadaten_kategorie }}<br />
+          metadaten_anzahl_bilder: {{ adAnalyzed.metadaten_anzahl_bilder
+          }}<br />
+          metadaten_telefonnummer: {{ adAnalyzed.metadaten_telefonnummer
+          }}<br />
+          metadaten_anzeige_zeit: {{ adAnalyzed.metadaten_anzeige_zeit
+          }}<br /><br />
 
-  <ion-card style="margin-bottom: 100px">
-    <ion-card-header>
-      <ion-card-title>Weitere Infos</ion-card-title>
-    </ion-card-header>
+          {{ adAnalyzed.sonstiges_anzeige_kopiert }}<br />
+          sonstiges_kategorie_unpassend:
+          {{ adAnalyzed.sonstiges_kategorie_unpassend }}<br />
+          ap_sonstiges_anzeige_zeit_tag:
+          {{ adAnalyzed.ap_sonstiges_anzeige_zeit_tag }}<br />
+          ap_sonstiges_anzeige_nur_abholung:
+          {{ adAnalyzed.ap_sonstiges_anzeige_nur_abholung }}<br />
+          ap_sonstiges_anzeige_suche:
+          {{ adAnalyzed.ap_sonstiges_anzeige_suche }}
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 
-    <ion-card-content>
-      Displayoptions:<br />
-      ad-flagging-enabled: {{ad.displayoptions['ad-flagging-enabled'].value}}<br />
-      category-change-allowed: {{ad.displayoptions['category-change-allowed'].value}}<br />
-      hide-ads-on-vip: {{ad.displayoptions['hide-ads-on-vip'].value}}<br />
-      hide-similard-ads-on-vip: {{ad.displayoptions['hide-similard-ads-on-vip'].value}}<br />
-      reduced-ads-on-vip: {{ad.displayoptions['reduced-ads-on-vip'].value}}<br />
-      show-ratings: {{ad.displayoptions['show-ratings'].value}}
-      <br /><br />
-      Location Radius: {{ad.locations.location[0].radius.value}}<br />
-      OriginId: {{ad.originId.value}}<br />
-      PosterType: {{ad['poster-type'].value}}<br/><br/>
-Attributes:<br/>
-<ng-container *ngFor="let attribute of ad.attributes[0].attribute">
-  <b>{{attribute.name}}</b>: {{attribute.value[0].value}}<br/>
-</ng-container>
-    </ion-card-content>
-  </ion-card>
-  <ion-row style="position: fixed; bottom: 0; left: 0; right: 0;">
+  <ion-row style="position: fixed; bottom: 0; left: 0; right: 0">
     <ion-col>
-      <ion-button expand="full" color="success" (click)="setLabel(ad.id, false)">Kein Betrug</ion-button>
+      <ion-button expand="full" color="success" (click)="setLabel(ad.id, false)"
+        >Kein Betrug</ion-button
+      >
     </ion-col>
     <ion-col>
-      <ion-button expand="full" color="danger" (click)="setLabel(ad.id, true)">Betrug</ion-button>
+      <ion-button expand="full" color="danger" (click)="setLabel(ad.id, true)"
+        >Betrug</ion-button
+      >
     </ion-col>
-    <ion-col *ngIf="!hideReviewButton">
-      <ion-button expand="full" (click)="setLabel(ad.id, null, true)">Unsicher</ion-button>
+    <ion-col *ngIf="!isToReview">
+      <ion-button expand="full" (click)="setLabel(ad.id, null, true)"
+        >Unsicher</ion-button
+      >
     </ion-col>
   </ion-row>
 </ion-grid>

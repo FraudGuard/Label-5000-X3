@@ -10,7 +10,8 @@ import { AdsFromEbay } from '../models/adFromEbay';
 })
 export class LabelCardComponent implements OnInit {
   @Input() ad: AdsFromEbay;
-  @Input() hideReviewButton = false;
+  @Input() adAnalyzed;
+  @Input() isToReview = false;
   @Output() getNextAd = new EventEmitter();
 
   constructor(private apiService: ApiService, public toastController: ToastController) { }

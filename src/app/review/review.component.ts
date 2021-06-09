@@ -10,6 +10,7 @@ import { AdsFromEbay } from '../models/adFromEbay';
 })
 export class ReviewComponent implements OnInit {
   ad: AdsFromEbay;
+  adAnalyzed;
   notFound;
 
   constructor(private apiService: ApiService, public toastController: ToastController) { }
@@ -25,6 +26,12 @@ export class ReviewComponent implements OnInit {
       if (res instanceof AdsFromEbay) {
         console.log('instanceMatched');
         this.ad = res;
+
+        // eslint-disable-next-line no-underscore-dangle
+        this.apiService.getAdById(res._id).subscribe(res2 => {
+        console.log('----',res2);
+        this.adAnalyzed = res2
+        });
       } else {
         const toast = await this.toastController.create({
           color: 'danger',

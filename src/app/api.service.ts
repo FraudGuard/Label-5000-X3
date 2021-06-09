@@ -21,6 +21,11 @@ export class ApiService {
       .pipe(map((u: any) => u.ad ? Object.assign(new AdsFromEbay(), u.ad) : u));
   }
 
+  getAdById(id) {
+    return this.http.get(`${environment.api}/api/ads/${id}`)
+      .pipe(map((u: any) => u.ad));
+  }
+
   updateAd(body: Partial<AdsFromEbay>) {
     return this.http.post(`${environment.api}/api/label/update`, body);
   }
